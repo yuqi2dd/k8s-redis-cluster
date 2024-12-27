@@ -8,6 +8,19 @@
 ├── redis-statefulset.yaml # Redis StatefulSet定义
 └── create-redis-cluster.sh # 集群创建脚本
 
+## 集群样例图
+
+![Redis集群样例图](img.png)
+
+Redis集群采用3主3从的高可用架构:
+- 6个Redis节点,其中3个主节点,3个从节点
+- 每个主节点对应一个从节点进行数据备份
+- 所有节点通过Kubernetes StatefulSet方式部署
+- 使用Kubernetes Service进行服务发现
+- 基于hostPath实现数据持久化存储
+- 节点间通过16379端口进行集群总线通信
+- 客户端通过6379端口访问集群服务
+
 ## 环境要求
 
 - Kubernetes 1.16+
